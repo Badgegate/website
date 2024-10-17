@@ -1,14 +1,18 @@
 'use client'
 
 import { formatDistanceToNow } from 'date-fns';
-import { ShieldIcon, CircleUserRound } from "lucide-react"
+import { CircleUserRound } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Opportunity } from '@/lib/types';
+import { buttonVariants } from "@/components/ui/button"
 
-type OpportunityCardProps = Omit<Opportunity, 'id'>;
+import { Opportunity } from '@/lib/types';
+import CredentialBadge from './credential-badge';
+import Link from 'next/link';
+
+type OpportunityCardProps = Opportunity;
 
 export default function OpportunityCard({
+  id,
   postedDate,
   title,
   description,
@@ -32,9 +36,9 @@ export default function OpportunityCard({
                 <span className="font-semibold">{company}</span>
               </div>
             </div>
-            <Button variant="outline">
+            <Link href={`/opportunity/${id}`} className={buttonVariants({ variant: "outline" })}>
               Learn more
-            </Button>
+            </Link>
           </div>
           <div className="p-6 flex flex-col">
             <div className="flex-grow">
@@ -45,11 +49,7 @@ export default function OpportunityCard({
             </div>
             <ul className="flex flex-col gap-2 items-start">
               {requiredCredentials.map((credential) => (
-                <li key={credential.id} className="flex items-center gap-1 h-10 pl-3 pr-4 py-2 rounded-full bg-muted text-muted-foreground">
-                  <ShieldIcon className="w-4 h-4" />
-                  <span className="text-sm font-semibold">{credential.name}</span>
-                  
-                </li>
+                <CredentialBadge key={credential.id} credential={credential} />
               ))}
             </ul>
           </div>

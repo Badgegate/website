@@ -1,5 +1,5 @@
-import Navbar from "../../components/navbar";
-import OpportunityCard from "../../components/opportunity-card";
+import Navbar from "@/components/navbar";
+import OpportunityCard from "@/components/opportunity-card";
 import { Opportunity } from '@/lib/types';
 
 async function getOpportunities(): Promise<Opportunity[]> {
@@ -22,13 +22,13 @@ export default async function Home() {
         <div className="flex flex-col gap-4 items-center mt-12 px-6">
           {opportunities.map((opportunity) => (
             <OpportunityCard 
-              key={opportunity.id}
-              postedDate={opportunity.postedDate}
-              title={opportunity.title}
-              description={opportunity.description}
-              company={opportunity.company}
-              requiredCredentials={opportunity.requiredCredentials}
-              
+                  id={opportunity.id}
+                  key={opportunity.id}
+                  postedDate={opportunity.postedDate}
+                  title={opportunity.title}
+                  description={opportunity.description}
+                  company={opportunity.company}
+                  requiredCredentials={opportunity.requiredCredentials} markdownContent={""}              
             />
           ))}
         </div>  

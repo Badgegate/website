@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from 'next/font/google';
 import "./globals.css";
-import Footer from "../components/footer";
+import Footer from "@/components/footer";
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],

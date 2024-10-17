@@ -1,8 +1,8 @@
-import AnimatedLogo from "../components/animated-logo";
-import CTATop from "../components/cta-top";
-import LeadText from "../components/lead-text";
-import Card from "../components/card";
-import CTABottom from "../components/cta-bottom";
+import AnimatedLogo from "@/components/animated-logo";
+import CTATop from "@/components/cta-top";
+import LeadText from "@/components/lead-text";
+import Card from "@/components/card";
+import CTABottom from "@/components/cta-bottom";
 
 
 export default function Home() {
