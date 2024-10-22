@@ -13,16 +13,16 @@ export default function OpportunityDetail({ opportunity, contentHtml }: Opportun
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">{opportunity.title}</h1>
-      <div className="flex items-center mb-4 text-sm text-muted-foreground">
+    <div className="max-w-2xl mx-auto p-6 mt-8 sm:mt-16 lg:mt-24">
+            <div className="flex items-center mb-4 text-sm text-muted-foreground">
         <CircleUserRound className="w-4 h-4 mr-2" />
         <span className="font-semibold mr-2">{opportunity.company}</span>
         <span>• Posted {formattedDate}</span>
       </div>
-      <p className="mb-8">{opportunity.description}</p>
+      <h1 className="text-4xl font-bold mb-4 tracking-tight">{opportunity.title}</h1>
+
       <div 
-        className="mb-8 prose dark:prose-invert"
+        className="mb-8 prose  prose-lg  prose-neutral dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: contentHtml }}
       />
       <h2 className="text-xl font-semibold mb-4">Required Credentials</h2>

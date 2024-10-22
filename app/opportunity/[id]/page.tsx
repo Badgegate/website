@@ -16,14 +16,16 @@ export default async function OpportunityPage({ params }: { params: { id: string
     notFound();
     return;
   }
+  
+  // Convert markdown content to HTML
   const contentHtml = await markdownToHtml(opportunity.markdownContent);
 
   return ( 
     <>
-        <Navbar />
-        <main className="flex-grow">
-            <OpportunityDetail opportunity={opportunity} contentHtml={contentHtml} />
-        </main>
+      <Navbar />
+      <main className="flex-grow">
+        <OpportunityDetail opportunity={opportunity} contentHtml={contentHtml} />
+      </main>
     </>
   );
 }
