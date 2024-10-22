@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 
 
-// Import the opportunities array from your existing route
-import { opportunities } from '../route';
+import { opportunities } from '@/lib/data/opportunities';
+
 
 export async function GET(
   request: Request,
