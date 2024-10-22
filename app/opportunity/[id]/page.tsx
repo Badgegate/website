@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar';
 import { markdownToHtml } from '@/lib/markdown';
 
 async function getOpportunity(id: string): Promise<Opportunity | null> {
-  const res = await fetch(`http://localhost:3000/api/opportunities/${id}`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/opportunities/${id}`, { cache: 'no-store' });
   if (!res.ok) return null;
   return res.json();
 }
