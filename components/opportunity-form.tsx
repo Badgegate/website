@@ -5,13 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { CredentialCheckboxCards } from "./credential-checkbox-cards"
 
 export default function OpportunityForm() {
   const [formData, setFormData] = useState({
     title: "",
     shortDescription: "",
     entity: "",
-    content: ""
+    content: "",
+    requiredCredentials: [] as string[]
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -22,6 +24,13 @@ export default function OpportunityForm() {
     }))
   }
 
+  const handleCredentialChange = (selectedIds: string[]) => {
+    setFormData(prevData => ({
+      ...prevData,
+      requiredCredentials: selectedIds
+    }))
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("Opportunity submitted:", formData)
@@ -29,9 +38,7 @@ export default function OpportunityForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 w-full max-w-4xl mx-auto p-6 ">
-      
-
+    <form onSubmit={handleSubmit} className="space-y-8 w-full max-w-2xl mx-auto p-6">
       <div className="space-y-2">
         <Label htmlFor="title">Opportunity Title</Label>
         <Input
@@ -64,7 +71,7 @@ export default function OpportunityForm() {
           name="entity"
           value={formData.entity}
           onChange={handleChange}
-          placeholder="Enter the entity's name"
+          placeholder="Enter the name of entity which is offereing this opportunity"
           required
         />
       </div>
@@ -79,6 +86,14 @@ export default function OpportunityForm() {
           placeholder="Write the full details of the opportunity here"
           required
           className="min-h-[200px]"
+        />
+      </div>
+
+      <div className="space-y-4">
+        <Label>Required Credentials</Label>
+        <CredentialCheckboxCards 
+          selectedCredentials={formData.requiredCredentials}
+          onSelectionChange={handleCredentialChange}
         />
       </div>
 
