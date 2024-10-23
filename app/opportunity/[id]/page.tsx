@@ -3,11 +3,14 @@ import { Opportunity } from '@/lib/types';
 import OpportunityDetail from '@/components/opportunity-detail';
 import Navbar from '@/components/navbar';
 import { markdownToHtml } from '@/lib/markdown';
+import { fetchApi } from "@/lib/api";
 
 async function getOpportunity(id: string): Promise<Opportunity | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/opportunities/${id}`, { cache: 'no-store' });
-  if (!res.ok) return null;
-  return res.json();
+  try {
+    return await fetchApi<Opportunity>(`/api/opportunities/${id}`);
+  } catch {
+    return null;
+  }
 }
 
 export default async function OpportunityPage({ params }: { params: { id: string } }) {

@@ -1,13 +1,10 @@
 import Navbar from "@/components/navbar";
 import OpportunityCard from "@/components/opportunity-card";
+import { fetchApi } from "@/lib/api";
 import { Opportunity } from '@/lib/types';
 
 async function getOpportunities(): Promise<Opportunity[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/opportunities`, { cache: 'no-store' });
-  if (!res.ok) {
-    throw new Error('Failed to fetch opportunities');
-  }
-  return res.json();
+  return fetchApi<Opportunity[]>('/api/opportunities');
 }
 
 export default async function Home() {
