@@ -1,8 +1,9 @@
 export interface Credential {
     id: string;
     name: string;
-    issuer?: string;
-    level?: string;
+    description: string;
+    issuer: string;
+    link: string;
   }
   
   export interface Opportunity {

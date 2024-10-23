@@ -1,4 +1,5 @@
 import { Opportunity } from '@/lib/types';
+import { credentials } from './credentials';
 
 export const opportunities: Opportunity[] = [
     {
@@ -8,18 +9,8 @@ export const opportunities: Opportunity[] = [
       description: 'Blanditiis officia autem eos molestiae aut aliquam. Aperiam qui deleniti hic tempora deserunt in quia fugit.',
       company: 'DFINITY Foundation',
       requiredCredentials: [
-        {
-          id: '1',
-          name: 'TypeScript Smart Contract 101',
-          issuer: 'Blockchain Academy',
-          level: 'Intermediate'
-        },
-        {
-          id: '2',
-          name: 'TypeScript Development 201',
-          issuer: 'CodeMasters',
-          level: 'Advanced'
-        }
+        credentials[0], // TypeScript Smart Contract 101
+        credentials[1]  // TypeScript Development 201
       ],
       markdownContent: `
 
@@ -71,18 +62,8 @@ All qualified applicants will receive consideration for employment without regar
       description: 'Seeking an experienced blockchain developer to work on cutting-edge decentralized applications.',
       company: 'Ethereum Foundation',
       requiredCredentials: [
-        {
-          id: '3',
-          name: 'Solidity Programming',
-          issuer: 'Ethereum Academy',
-          level: 'Advanced'
-        },
-        {
-          id: '4',
-          name: 'Smart Contract Security',
-          issuer: 'Blockchain Security Institute',
-          level: 'Intermediate'
-        }
+        credentials[2], // Solidity Programming
+        credentials[3]  // Smart Contract Security
       ],
       markdownContent: `
 # Front-end Software Engineer

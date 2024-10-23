@@ -3,7 +3,9 @@ import { CircleUserRound } from "lucide-react"
 import { Opportunity } from '@/lib/types';
 import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+
 interface OpportunityDetailProps {
   opportunity: Opportunity;
 }
@@ -23,20 +25,24 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
         <p>{opportunity.description}</p>
       </div>
-        <Card className="w-full max-w-3xl mb-8">
-          <CardContent className="not-prose pt-6">
+
+      <Card className="w-full max-w-3xl mb-8">
+        <CardContent className="not-prose pt-6">
           <h3 className="text-xs font-bold mt-1 mb-2 uppercase tracking-wide">unlock opportunity</h3>
-              <p className="mb-6 ">
+          <p className="mb-6 ">
                 The following verified credentials are needed to unlock this opportunity
-              </p>
-              <ul className="gap-2 flex flex-col items-start">
-        {opportunity.requiredCredentials.map((credential) => (
-          <CredentialBadge key={credential.id} credential={credential} />
-        ))}
-      </ul>
-          </CardContent>
-        </Card>
-        <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
+          </p>
+          <ul className="gap-2 flex flex-col items-start">
+            {opportunity.requiredCredentials.map((credential) => (
+              <CredentialBadge key={credential.id} credential={credential} />
+            ))}
+        </ul>
+        </CardContent>
+        <CardFooter>
+          <Button className='w-full'>Check your permissions</Button>
+        </CardFooter>
+      </Card>
+      <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
         <ReactMarkdown>{opportunity.markdownContent}</ReactMarkdown>
       </div>
       
