@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { CredentialCheckboxCards } from "./credential-checkbox-cards"
+import { CredentialCheckbox } from "./credential-checkbox"
 
 export default function OpportunityForm() {
   const [formData, setFormData] = useState({
@@ -91,7 +91,7 @@ export default function OpportunityForm() {
 
       <div className="space-y-4">
         <Label>Required Credentials</Label>
-        <CredentialCheckboxCards 
+        <CredentialCheckbox 
           selectedCredentials={formData.requiredCredentials}
           onSelectionChange={handleCredentialChange}
         />
