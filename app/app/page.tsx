@@ -14,7 +14,7 @@ export default async function Home() {
           <h1 className="text-4xl font-bold mb-4 tracking-tight">Explore opportunities</h1>
           <p className="text-foreground">
             Seeking top talent or a qualified audience? <br />
-            <Link href="/app/submit" className="text-primary font-medium hover:underline">Submit your opportunity </Link> 
+            <Link href="./submit" className="text-primary font-medium hover:underline">Submit your opportunity </Link> 
             {` `}
             to our curated listing.
           </p>
