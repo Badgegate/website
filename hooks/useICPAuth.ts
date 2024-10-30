@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { AuthClient } from "@dfinity/auth-client";
+import { ii_frontend_url_experimental } from "@/lib/constants";
 
 type UseICPAuthReturn = {
   isAuthenticated: boolean;
@@ -31,11 +32,10 @@ function useICPAuth(): UseICPAuthReturn {
     initializeAuthClient();
   }, []);
 
-  // Login function wrapped in useCallback for stability in dependencies
   const loginWithInternetIdentity = useCallback(async () => {
     if (authClient) {
       await authClient.login({
-        identityProvider: "https://identity.internetcomputer.org",
+        identityProvider: ii_frontend_url_experimental,
         onSuccess: () => {
           setIsAuthenticated(true);
           const identity = authClient.getIdentity();
@@ -45,7 +45,6 @@ function useICPAuth(): UseICPAuthReturn {
     }
   }, [authClient]);
 
-  // Logout function wrapped in useCallback
   const logout = useCallback(async () => {
     if (authClient) {
       await authClient.logout();
