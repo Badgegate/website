@@ -13,20 +13,20 @@ function useICPAuth(): UseICPAuthReturn {
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const [principal, setPrincipal] = useState<string | null>(null);
 
-  // Initialize the AuthClient
+  // Initialize the AuthClient and check if the user is authenticated
   useEffect(() => {
     async function initializeAuthClient() {
       const client = await AuthClient.create();
       setAuthClient(client);
 
-      // Check if the user is already authenticated in this session
+      // Check if the user is already authenticated - local storage session
       const isAuthenticated = await client.isAuthenticated();
-      setIsAuthenticated(isAuthenticated);
-
       if (isAuthenticated) {
         const identity = client.getIdentity();
         setPrincipal(identity.getPrincipal().toText());
       }
+      setIsAuthenticated(isAuthenticated);
+
     }
     initializeAuthClient();
   }, []);
