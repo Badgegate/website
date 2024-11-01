@@ -15,3 +15,10 @@ export interface Credential {
     requiredCredentials: Credential[];
     markdownContent: string; // New field
   }
+
+export type ICPAuthReturn = {
+  isAuthenticated: boolean;
+  principal: string | null;
+  loginWithInternetIdentity: () => Promise<void>;
+  logout: () => Promise<void>;
+};

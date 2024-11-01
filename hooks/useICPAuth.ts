@@ -1,15 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { AuthClient } from "@dfinity/auth-client";
 import { ii_frontend_url_experimental } from "@/lib/constants";
+import { ICPAuthReturn } from "@/lib/types";
 
-type UseICPAuthReturn = {
-  isAuthenticated: boolean;
-  principal: string | null;
-  loginWithInternetIdentity: () => Promise<void>;
-  logout: () => Promise<void>;
-};
-
-function useICPAuth(): UseICPAuthReturn {
+function useICPAuth(): ICPAuthReturn {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
   const [principal, setPrincipal] = useState<string | null>(null);
