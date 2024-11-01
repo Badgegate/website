@@ -8,13 +8,14 @@ import { GradientAvatar } from './gradient-avatar';
 interface UserMenuProps {
   isMobile?: boolean;
   handleDisconnectWallet: () => void;
+  principal: string | null;
 }
 
-export const UserMenu: React.FC<UserMenuProps> = ({ isMobile = false, handleDisconnectWallet }) => (
+export const UserMenu: React.FC<UserMenuProps> = ({ isMobile = false, handleDisconnectWallet, principal }) => (
   <div className="flex flex-col">
     <div className="flex flex-col items-center mb-6 pt-6 px-2">
       <GradientAvatar size={80} />
-      <p className="mt-2 font-medium text-sm">0ba4f...bKyXp</p>
+      <p className="mt-2 font-medium text-sm">{`${principal?.slice(0, 4)}....${principal?.slice(-3)}`}</p>
     </div>
     <Separator className="w-full mb-2" />
     <div className="space-y-2 px-2">

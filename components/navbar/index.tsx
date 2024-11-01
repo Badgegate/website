@@ -17,7 +17,7 @@ export default function Navbar() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  const { isAuthenticated, loginWithInternetIdentity, logout } = useICPAuth();
+  const { isAuthenticated, loginWithInternetIdentity, logout, principal } = useICPAuth();
 
   useEffect(() => {
     setIsMounted(true)
@@ -62,7 +62,7 @@ export default function Navbar() {
                     </Button>
                   </DrawerTrigger>
                   <DrawerContent>
-                    <UserMenu isMobile={true} handleDisconnectWallet={handleDisconnectWallet} />
+                    <UserMenu isMobile={true} handleDisconnectWallet={handleDisconnectWallet} principal={principal} />
                   </DrawerContent>
                 </Drawer>
               ) : (
@@ -73,7 +73,7 @@ export default function Navbar() {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-80 p-0" align="end">
-                    <UserMenu handleDisconnectWallet={handleDisconnectWallet} />
+                    <UserMenu handleDisconnectWallet={handleDisconnectWallet} principal={principal} />
                   </PopoverContent>
                 </Popover>
               )
