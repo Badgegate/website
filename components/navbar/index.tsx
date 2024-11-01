@@ -10,14 +10,15 @@ import { GradientAvatar } from './gradient-avatar'
 import { NavLink } from './nav-link'
 import { UserMenu } from './user-menu'
 import Logo from '../logo'
-import useICPAuth from "../../hooks/useICPAuth";
-
+import { useAuth } from '@/lib/context/AuthContext'
+import useICPAuth from '@/hooks/useICPAuth'
 
 export default function Navbar() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const isMobile = useMediaQuery({ maxWidth: 768 })
-  const { isAuthenticated, loginWithInternetIdentity, logout, principal } = useICPAuth();
+  const {loginWithInternetIdentity, logout} = useICPAuth();
+  const { principal } = useAuth();
 
   useEffect(() => {
     setIsMounted(true)
@@ -42,8 +43,6 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between py-4 px-6 bg-background/80 backdrop-blur-sm border-b border-border">
-      
-     
         <div className="flex sm:w-1/3">
           <div className="flex items-center space-x-6">
             <NavLink href="/explore">Explore</NavLink>
@@ -53,7 +52,7 @@ export default function Navbar() {
        <Logo className='sm:block hidden' />
        <div className="sm:w-1/3 flex justify-end">
           <div className="h-10 flex items-center">
-            {isAuthenticated ? (
+            {principal ? (
               isMobile ? (
                 <Drawer open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
                   <DrawerTrigger asChild>
@@ -62,7 +61,7 @@ export default function Navbar() {
                     </Button>
                   </DrawerTrigger>
                   <DrawerContent>
-                    <UserMenu isMobile={true} handleDisconnectWallet={handleDisconnectWallet} principal={principal} />
+                    <UserMenu isMobile={true} handleDisconnectWallet={handleDisconnectWallet} />
                   </DrawerContent>
                 </Drawer>
               ) : (
@@ -73,7 +72,7 @@ export default function Navbar() {
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-80 p-0" align="end">
-                    <UserMenu handleDisconnectWallet={handleDisconnectWallet} principal={principal} />
+                    <UserMenu handleDisconnectWallet={handleDisconnectWallet} />
                   </PopoverContent>
                 </Popover>
               )
