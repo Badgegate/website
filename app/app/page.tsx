@@ -17,7 +17,7 @@ export default async function Home() {
           <p className="text-foreground">
             Seeking top talent or a qualified audience? <br />
             <Link
-              href="./submit"
+              href="/submit"
               className="text-primary font-medium hover:underline"
             >
               Submit your opportunity{" "}
