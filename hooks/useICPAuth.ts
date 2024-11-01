@@ -1,15 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useLayoutEffect } from "react";
 import { AuthClient } from "@dfinity/auth-client";
 import { ii_frontend_url_experimental } from "@/lib/constants";
 import { ICPAuthReturn } from "@/lib/types";
+import { useAuth } from "@/lib/context/AuthContext";
 
 function useICPAuth(): ICPAuthReturn {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [authClient, setAuthClient] = useState<AuthClient | null>(null);
-  const [principal, setPrincipal] = useState<string | null>(null);
+  const { setPrincipal } = useAuth();
 
   // Initialize the AuthClient and check if the user is authenticated
-  useEffect(() => {
+  useLayoutEffect(() => {
     async function initializeAuthClient() {
       const client: AuthClient = await AuthClient.create();
       setAuthClient(client);
@@ -52,7 +53,7 @@ function useICPAuth(): ICPAuthReturn {
     }
   }, [authClient]);
 
-  return { isAuthenticated, principal, loginWithInternetIdentity, logout };
+  return { isAuthenticated, loginWithInternetIdentity, logout };
 }
 
 export default useICPAuth;
