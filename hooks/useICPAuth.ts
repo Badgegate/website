@@ -44,6 +44,11 @@ function useICPAuth(): ICPAuthReturn {
       await authClient.logout();
       setIsAuthenticated(false);
       setPrincipal(null);
+      /* 
+      Creating a new instance of authClient to 
+      prevent unexpected behaviour during subsequent login
+      */
+      await AuthClient.create();
     }
   }, [authClient]);
 
