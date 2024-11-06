@@ -17,20 +17,20 @@ interface OpportunityDetailProps {
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
   const { principal } = useAuth();
-  const [userPermission, setUserPermission] = useState<boolean>(false);
+  const [hasPermission, setHasPermission] = useState<boolean>(false);
 
   useEffect(() => {
     if (!principal) {
-      setUserPermission(false);
+      setHasPermission(false);
       return;
     } 
 
     const credentialId = opportunity.requiredCredentials[0].id;
     const key = `credential_${principal}_${credentialId}`;
     if (getCredentialStatus(key)) {
-      setUserPermission(true);
+      setHasPermission(true);
     } else {
-      setUserPermission(false);
+      setHasPermission(false);
     } 
   }, [principal]);
 
@@ -50,7 +50,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       const credentialId = opportunity.requiredCredentials[0].id;
       const key = `credential_${principal}_${credentialId}`;
       localStorage.setItem(key, result);
-      setUserPermission(true);
+      setHasPermission(true);
     } catch {}
   }
 
@@ -81,13 +81,13 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
           </p>
           <ul className="gap-2 flex flex-col items-start">
             {opportunity.requiredCredentials.map((credential) => (
-              <CredentialBadge key={credential.id} credential={credential} hasPermission={userPermission} />
+              <CredentialBadge key={credential.id} credential={credential} hasPermission={hasPermission} />
             ))}
           </ul>
         </CardContent>
         <CardFooter>
           {principal ? (
-            userPermission ? (
+            hasPermission ? (
                 <Button onClick={handleApply} className="w-full">
                   Apply
                 </Button>
