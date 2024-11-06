@@ -1,7 +1,7 @@
 "use client";
 import { formatDistanceToNow } from 'date-fns';
 import { CircleUserRound } from "lucide-react";
-import { CredentialStatus, DecodedJWT, DecodedRequestedCredential, Opportunity } from '@/lib/types';
+import { DecodedJWT, DecodedRequestedCredential, Opportunity } from '@/lib/types';
 import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -9,18 +9,13 @@ import { Button } from '@/components/ui/button';
 import requestVerifiableCredential from '@/lib/services/requestCredential';
 import { useAuth } from '../lib/context/AuthContext';
 import { jwtDecode } from 'jwt-decode';
-import { useState } from 'react';
-import RequestCredentialModal from '@/components/ui/RequestCredentialModal'; // Import the new ModalOverlay component
+import { useEffect, useState } from 'react';
 
 interface OpportunityDetailProps {
   opportunity: Opportunity;
 }
 
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [statusMessage, setStatusMessage] = useState('');
-  const [credentialStatus, setCredentialStatus] = useState<CredentialStatus>(null);
-  
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
   const { principal } = useAuth();
 
@@ -45,50 +40,15 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
   }
 
   async function handleCheckPermissions() {
-    if (!principal) {
-      alert("Login to check permissions");
-      return;
-    }
-
-    const credentialId = opportunity.requiredCredentials[0].id;
-    const key = `credential_${principal}_${credentialId}`;
-
-    const credential = getCredentialFromLocalStorage(key);
-    if (credential) {
-      setCredentialStatus("present");
-      setStatusMessage("Credential present");
-      setModalOpen(true);
-      return;
-    }
-
-    setCredentialStatus("not_present");
-    setStatusMessage("Permission not available");
-    setModalOpen(true);
-  }
-
-  async function handleRequestCredential() {
-    if (!principal) {
-      alert("Login to check permissions");
-      return;
-    }
+    if (!principal) return;
+    
     try {
       const result = await requestVerifiableCredential(principal, opportunity.requiredCredentials[0]);
       const credentialId = opportunity.requiredCredentials[0].id;
       const key = `credential_${principal}_${credentialId}`;
-
       localStorage.setItem(key, result);
-      setCredentialStatus("present");
-      setStatusMessage("Credential obtained");
     } catch (error) {
-      console.log(error);
-      setStatusMessage("Failed to obtain credential Please try again");
     }
-  }
-
-  function closeModal() {
-    setModalOpen(false);
-    setStatusMessage('');
-    setCredentialStatus(null);
   }
 
   return (
@@ -119,23 +79,13 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
           </ul>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleCheckPermissions} className="w-full">Check your permissions</Button>
+          <Button onClick={handleCheckPermissions} className="w-full">Check permission to apply</Button>
         </CardFooter>
       </Card>
 
       <div className="mb-8 prose prose-lg prose-neutral dark:prose-invert">
         <ReactMarkdown>{opportunity.markdownContent}</ReactMarkdown>
       </div>
-
-      {/* Render ModalOverlay if modal is open */}
-      {modalOpen && (
-        <RequestCredentialModal
-          statusMessage={statusMessage}
-          onClose={closeModal}
-          onRequestCredential={handleRequestCredential}
-          credentialStatus={credentialStatus}
-        />
-      )}
     </div>
   );
 }
