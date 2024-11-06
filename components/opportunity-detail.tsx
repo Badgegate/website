@@ -35,11 +35,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
   }, [principal]);
 
   function getCredentialStatus(key: string): boolean {
-    try {
-      return localStorage.getItem(key) ? true : false;
-    } catch {
-      return false;
-    }
+    return !!window?.localStorage.getItem(key);
   }
 
   async function handleCheckPermission() {
