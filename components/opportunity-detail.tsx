@@ -21,7 +21,10 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
   const [userPermission, setUserPermission] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!principal) return;
+    if (!principal) {
+      setUserPermission(false);
+      return;
+    } 
 
     const credentialId = opportunity.requiredCredentials[0].id;
     const key = `credential_${principal}_${credentialId}`;
@@ -52,7 +55,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
     }
   }
 
-  async function handleCheckPermissions() {
+  async function handleCheckPermission() {
     if (!principal) return;
     
     try {
@@ -63,6 +66,10 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       setUserPermission(true);
     } catch (error) {
     }
+  }
+
+  function handleApply() {
+    window.open("https://example.com", "_blank");
   }
 
   return (
@@ -88,12 +95,26 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
           </p>
           <ul className="gap-2 flex flex-col items-start">
             {opportunity.requiredCredentials.map((credential) => (
-              <CredentialBadge key={credential.id} credential={credential} />
+              <CredentialBadge key={credential.id} credential={credential} hasPermission={userPermission} />
             ))}
           </ul>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleCheckPermissions} className="w-full">Check permission to apply</Button>
+          {principal ? (
+            userPermission ? (
+                <Button onClick={handleApply} className="w-full">
+                  Apply
+                </Button>
+              ) : (
+                <Button onClick={handleCheckPermission} className="w-full">
+                  Check permission to apply
+                </Button>
+              )
+          ) : (
+            <Button className="w-full" variant="disabled">
+              Check permission to apply
+            </Button>
+          )}
         </CardFooter>
       </Card>
 
