@@ -18,6 +18,19 @@ interface OpportunityDetailProps {
 export default function OpportunityDetail({ opportunity }: OpportunityDetailProps) {
   const formattedDate = formatDistanceToNow(new Date(opportunity.postedDate), { addSuffix: true });
   const { principal } = useAuth();
+  const [userPermission, setUserPermission] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!principal) return;
+
+    const credentialId = opportunity.requiredCredentials[0].id;
+    const key = `credential_${principal}_${credentialId}`;
+    if (getCredentialFromLocalStorage(key)) {
+      setUserPermission(true);
+    } else {
+      setUserPermission(false);
+    } 
+  }, [principal]);
 
   function getCredentialFromLocalStorage(key: string) {
     try {
@@ -47,6 +60,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       const credentialId = opportunity.requiredCredentials[0].id;
       const key = `credential_${principal}_${credentialId}`;
       localStorage.setItem(key, result);
+      setUserPermission(true);
     } catch (error) {
     }
   }
