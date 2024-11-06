@@ -11,6 +11,7 @@ export const opportunities: Opportunity[] = [
       requiredCredentials: [
         credentials[4], // Dacade TS101
       ],
+      applyUrl: "https://example.com",
       markdownContent: `
 
 Do you have extensive experience crafting high-performance, secure DevOps pipelines? Are you passionate about building the future of the internet on the cutting edge of blockchain technology? If you have deep expertise in Kubernetes, CI/CD, and PromQL, and you’re excited to push boundaries, then let’s talk!
@@ -65,6 +66,7 @@ All qualified applicants will receive consideration for employment without regar
         // credentials[2], // Solidity Programming
         // credentials[3]  // Smart Contract Security
       ],
+      applyUrl: "https://example.com",
       markdownContent: `
 # Front-end Software Engineer
 
@@ -97,6 +99,7 @@ For more information, visit our [website](https://example.com).
       requiredCredentials: [
         credentials[5], // Dacade TS101
       ],
+      applyUrl: "https://example.com",
       markdownContent: `
 
 Do you have extensive experience crafting high-performance, secure DevOps pipelines? Are you passionate about building the future of the internet on the cutting edge of blockchain technology? If you have deep expertise in Kubernetes, CI/CD, and PromQL, and you’re excited to push boundaries, then let’s talk!

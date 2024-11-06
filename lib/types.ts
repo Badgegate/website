@@ -19,7 +19,8 @@ export interface Credential {
     description: string;
     company: string;
     requiredCredentials: Credential[];
-    markdownContent: string; // New field
+    markdownContent: string;
+    applyUrl: string;
   }
 
 export type ICPAuthReturn = {

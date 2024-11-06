@@ -56,7 +56,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
   }
 
   function handleApply() {
-    window.open("https://example.com", "_blank");
+    window.open(opportunity.applyUrl, "_blank", "noopener");
   }
 
   return (
