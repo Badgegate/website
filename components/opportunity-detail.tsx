@@ -1,14 +1,13 @@
 "use client";
 import { formatDistanceToNow } from 'date-fns';
 import { CircleUserRound } from "lucide-react";
-import { DecodedJWT, DecodedRequestedCredential, Opportunity } from '@/lib/types';
+import { Opportunity } from '@/lib/types';
 import CredentialBadge from '@/components/credential-badge';
 import ReactMarkdown from 'react-markdown';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import requestVerifiableCredential from '@/lib/services/requestCredential';
 import { useAuth } from '../lib/context/AuthContext';
-import { jwtDecode } from 'jwt-decode';
 import { useEffect, useState } from 'react';
 
 interface OpportunityDetailProps {
@@ -28,30 +27,18 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
 
     const credentialId = opportunity.requiredCredentials[0].id;
     const key = `credential_${principal}_${credentialId}`;
-    if (getCredentialFromLocalStorage(key)) {
+    if (getCredentialStatus(key)) {
       setUserPermission(true);
     } else {
       setUserPermission(false);
     } 
   }, [principal]);
 
-  function getCredentialFromLocalStorage(key: string) {
+  function getCredentialStatus(key: string): boolean {
     try {
-      const storedCredential: string | null = localStorage.getItem(key);
-      if (!storedCredential) return null;
-
-      const decodedToken: DecodedJWT = jwtDecode(storedCredential);
-      const decodedIssuerToken: DecodedRequestedCredential = jwtDecode(decodedToken.vp.verifiableCredential[1]);
-      const expTimeStamp = decodedIssuerToken.exp;
-
-      if (new Date() > new Date(expTimeStamp * 1000)) {
-        localStorage.removeItem(key);
-        return null;
-      }
-      return storedCredential;
+      return localStorage.getItem(key) ? true : false;
     } catch (error) {
-      console.log(error);
-      return null;
+      return false;
     }
   }
 
