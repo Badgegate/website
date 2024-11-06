@@ -37,7 +37,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
   function getCredentialStatus(key: string): boolean {
     try {
       return localStorage.getItem(key) ? true : false;
-    } catch (error) {
+    } catch {
       return false;
     }
   }
@@ -51,8 +51,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
       const key = `credential_${principal}_${credentialId}`;
       localStorage.setItem(key, result);
       setUserPermission(true);
-    } catch (error) {
-    }
+    } catch {}
   }
 
   function handleApply() {
