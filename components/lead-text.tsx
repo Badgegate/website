@@ -4,8 +4,8 @@ export default function LeadText() {
   return (
     <div className="w-full px-6 py-5 border-b border-border">
       <p className="text-xl sm:text-2xl md:text-3xl font-bold">
-        Non optio est quae. Tempora earum a at voluptatem. Tempora et unde dolorem at natus sed cumque deserunt laudantium. Aut quia et ut consequuntur. Dicta debitis dicta. Exercitationem modi dignissimos quo commodi voluptatem atque est rerum facilis.
-      </p>
+      Transform your achievements into opportunities. Badgegate connects talented individuals with ventures through a secure, credential-based matching system built on the Internet Computer. Our platform uses verifiable credentials to create a trusted bridge between builders and organizations.
+        </p>
     </div>
   );
 }

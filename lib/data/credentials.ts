@@ -67,8 +67,8 @@ export const credentials: Credential[] = [
   },
   {
     id: '5',
-    name: 'TS101',
-    description: 'Learn to identify and prevent common security vulnerabilities in smart contracts, including best practices for auditing.',
+    name: 'TypeScript Smart Contract 101',
+    description: 'The credential proves that the owner successfully absolved an introduction to developing on the Internet Computer Protocol (ICP) platform using TypeScript.',
     issuer: 'Dacade',
     link: 'https://dacade.org/communities/icp/challenges/256f0a1c-5f4f-495f-a1b3-90559ab3c51f',
     derivationUrl: 'https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io',

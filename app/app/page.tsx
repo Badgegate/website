@@ -13,13 +13,13 @@ export default function Home() {
           <p className="text-foreground">
             Seeking top talent or a qualified audience? <br />
             <Link
-              href="/app/submit"
+              href="mailto:hello@badgegate.com"
               className="text-primary font-medium hover:underline"
             >
-              Submit your opportunity{" "}
+              Contact us{" "}
             </Link>
             {` `}
-            to our curated listing.
+            to join our curated listing.
           </p>
         </div>
         <div className="flex flex-col gap-4 items-center px-6">

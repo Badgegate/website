@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { ChevronRight } from "lucide-react";
@@ -21,7 +20,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ handleDisconnectWallet }) =>
         <Avatar name={avatarProp} size={80} />
         <p className="mt-2 font-medium text-sm">{`${principal?.slice(0, 4)}....${principal?.slice(-3)}`}</p>
       </div>
-      <Separator className="w-full mb-2" />
+      {/* <Separator className="w-full mb-2" />
       <div className="space-y-2 px-2">
       <Button variant="ghost" className="w-full justify-between py-3.5 px-2 text-lg lg:text-sm" asChild>
           <Link href="/opportunities">
@@ -35,7 +34,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ handleDisconnectWallet }) =>
             <ChevronRight className="h-5 w-5" />
           </Link>
         </Button>
-      </div>
+      </div> */}
       <Separator className="w-full my-2" />
       <div className="px-2 pb-2">
         <Button 
@@ -43,7 +42,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ handleDisconnectWallet }) =>
           className="w-full justify-between text-destructive py-3.5 px-2 text-lg lg:text-sm"
           onClick={handleDisconnectWallet}
         >
-          <span>Disconnect wallet</span>
+          <span>Log out</span>
           <ChevronRight className="h-5 w-5" />
         </Button>
       </div>

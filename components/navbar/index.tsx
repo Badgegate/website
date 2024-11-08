@@ -12,6 +12,7 @@ import Logo from '../logo'
 import { useAuth } from '@/lib/context/AuthContext'
 import useICPAuth from '@/hooks/useICPAuth'
 import Avatar from 'boring-avatars'
+import Link from 'next/link'
 
 export default function Navbar() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
@@ -32,11 +33,11 @@ export default function Navbar() {
     <nav className="flex items-center justify-between py-4 px-6 bg-background/80 backdrop-blur-sm border-b border-border">
       <div className="flex sm:w-1/3">
         <div className="flex items-center space-x-6">
-          <NavLink href="/explore">Explore</NavLink>
-          <NavLink href="/how-it-works">How it works</NavLink>
+          <NavLink href="/app">Opportunities</NavLink>
+          
         </div>
       </div>
-      <Logo className="sm:block hidden" />
+      <Link href="/"><Logo className="sm:block hidden" /></Link>
       <div className="sm:w-1/3 flex justify-end">
         <div className="h-10 flex items-center">
           {isLoading ? (
