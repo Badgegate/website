@@ -13,7 +13,7 @@ export default function Home() {
           <p className="text-foreground">
             Seeking top talent or a qualified audience? <br />
             <Link
-              href="mailto:hello@badgegate.com"
+              href="mailto:hello@badgegate.org"
               className="text-primary font-medium hover:underline"
             >
               Contact us{" "}
