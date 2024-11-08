@@ -1,5 +1,5 @@
 import { Opportunity } from '@/lib/types';
-import { credentials } from './credentials';
+import { credentials } from '@/lib/data/credentials';
 
 export const opportunities: Opportunity[] = [
     {
@@ -146,3 +146,11 @@ All qualified applicants will receive consideration for employment without regar
 
     
   ];
+
+export function getOpportunities() {
+  return opportunities;
+}
+
+export function getOpportunityById(id: string) {
+  return opportunities.find((opportunity) => opportunity.id === id);
+}

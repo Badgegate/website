@@ -1,10 +1,8 @@
 import OpportunityCard from "@/components/opportunity-card";
-import { getOpportunities } from "@/lib/services/opportunities";
+import { opportunities } from "@/lib/data/opportunities";
 import Link from "next/link";
 
-export default async function Home() {
-  const opportunities = await getOpportunities();
-
+export default function Home() {
   return (
     <>
       <main className="flex-grow">

@@ -1,20 +1,29 @@
-import { notFound } from 'next/navigation';
-import OpportunityDetail from '@/components/opportunity-detail';
-import { getOpportunityById } from '@/lib/services/opportunities';
+import { notFound } from "next/navigation";
+import { opportunities } from "@/lib/data/opportunities";
+import OpportunityDetail from "@/components/opportunity-detail";
 
-export default async function OpportunityPage({ params }: { params: { id: string } }) {
-  const opportunity = await getOpportunityById(params.id);
-  
+export async function generateStaticParams() {
+  return opportunities.map((opportunity) => ({
+    id: opportunity.id,
+  }));
+}
+
+interface OpportunityPageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function OpportunityPage({ params }: OpportunityPageProps) {
+  const opportunity = opportunities.find(opp => opp.id === params.id);
+
   if (!opportunity) {
     notFound();
-    return;
   }
 
-  return ( 
-    <>
-      <main className="flex-grow">
-        <OpportunityDetail opportunity={opportunity} />
-      </main>
-    </>
+  return (
+    <main className="flex-grow">
+      <OpportunityDetail opportunity={opportunity} />
+    </main>
   );
 }

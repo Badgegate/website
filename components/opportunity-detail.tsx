@@ -32,7 +32,7 @@ export default function OpportunityDetail({ opportunity }: OpportunityDetailProp
     } else {
       setHasPermission(false);
     } 
-  }, [principal]);
+  }, [principal, opportunity.requiredCredentials]);
 
   function getCredentialStatus(key: string): boolean {
     return !!window?.localStorage.getItem(key);
