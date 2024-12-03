@@ -102,13 +102,13 @@ export const credentials: Credential[] = [
     name: 'Demo',
     description: 'This is an example listing for users to try out and experience the process. Check the details below for step-by-step instructions.',
     issuer: 'Dacade',
-    link: 'https://rp-dacade-demo.netlify.app/',
-    derivationUrl: 'https://a4gq6-oaaaa-aaaab-qaa4q-cai.raw.icp0.io',
+    link: 'https://rp-dacade-demo.vercel.app',
+    derivationUrl: 'https://rp-dacade-demo.vercel.app',
     issuerUrl: "https://dacade.org/",
     credentialSpec: {
       credentialType: "Verified course completion on Dacade",
       arguments: {
-        "course": "ICP101",
+        "course": "DEMO",
       }
     },
     canisterId: "bu5ax-5iaaa-aaaam-qbgcq-cai",
